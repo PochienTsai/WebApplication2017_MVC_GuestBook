@@ -128,11 +128,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdoNetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models2\DepartmentTable2.cs" />
+    <Compile Include="Models2\MVC_UserDB2Context.cs" />
+    <Compile Include="Models2\UDmultiViewModel.cs" />
+    <Compile Include="Models2\UDViewModel.cs" />
+    <Compile Include="Models2\UserDepartmentViewModel.cs" />
+    <Compile Include="Models2\UserTable2.cs" />
+    <Compile Include="Models2\UserTable2ViewModel.cs" />
     <Compile Include="Models\ListAllViewModel.cs" />
     <Compile Include="Models\MVC_UserDBContext.cs" />
     <Compile Include="Models\PaginatedList.cs" />
@@ -148,6 +156,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models2\MVC_ViewModel_004.png" />
+    <Content Include="Models2\UserDB2_01.jpg" />
+    <Content Include="Models2\UserDB2_02.jpg" />
+    <Content Include="Models2\UserDB2_03.jpg" />
     <Content Include="Models\ListAllViewModel-初學者用不到.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
