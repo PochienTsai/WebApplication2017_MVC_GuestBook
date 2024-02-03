@@ -334,20 +334,20 @@ namespace WebApplication2017_MVC_GuestBook.Controllers
             #endregion
 
 
-            // 檢視畫面上的「下拉式選單（DropDownList）」。
-            // 直接連結一個資料表，當作 DropDownList的資料來源。
-            #region   // 請參閱 DropDownList控制器，底下的 Create1動作。  ADO.NET版 請看 Create1A動作
-            var dt = _db.DepartmentTable2s.ToList();   // 這一列改成 ADO.NET程式，就能到資料庫撈取您要的數據
+            //// 檢視畫面上的「下拉式選單（DropDownList）」。
+            //// 直接連結一個資料表，當作 DropDownList的資料來源。
+            //#region   // 請參閱 DropDownList控制器，底下的 Create1動作。  ADO.NET版 請看 Create1A動作
+            //var dt = _db.DepartmentTable2s.ToList();   // 這一列改成 ADO.NET程式，就能到資料庫撈取您要的數據
 
-            //*******************************************************************************
-            //*** 重點！！這裡需要用 第四個參數。當作「預設值（SelectedValue）」
-            //*******************************************************************************
-            SelectList listItems = new SelectList(dt, "DepartmentId", "DepartmentName", resultClass.DepartmentId);
-            // 先寫 <option>子選項的 value，再寫 text
+            ////*******************************************************************************
+            ////*** 重點！！這裡需要用 第四個參數。當作「預設值（SelectedValue）」
+            ////*******************************************************************************
+            //SelectList listItems = new SelectList(dt, "DepartmentId", "DepartmentName", resultClass.DepartmentId);
+            //// 先寫 <option>子選項的 value，再寫 text
 
-            ViewBag.DtListItem = listItems;
-            //*******************
-            #endregion
+            //ViewBag.DtListItem = listItems;
+            ////*******************
+            //#endregion
 
 
             return View(resultClass);   // 把這一筆記錄呈現出來。   
