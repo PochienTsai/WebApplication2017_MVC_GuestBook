@@ -2,7 +2,7 @@ namespace WebApplication2017_MVC_GuestBook.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;   // 每個屬性上方的 [ ]符號，就得搭配這個命名空間
+    using System.ComponentModel.DataAnnotations;   // 每個欄位上方的 [ ]符號，就得搭配這個命名空間
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Web.Mvc;   //搭配 [Bind(Include=.......)]  的命名空間
