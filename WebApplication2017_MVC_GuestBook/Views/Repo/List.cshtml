@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models.UserTable>
+@*
+    // 註解：請問 model與 Model兩個字（除了大小寫不同）有何差異？？
+    // @Model is "a property of the view" that refers to the model that was passed to the view from the controller.
+    // This property is strongly typed based on the data type specified in the @model directive at the top of the view.
+    // ***  @model occurs "only once" and specifies the "data type" of the model.
+    // ***  @Model allows you to reference "the value for the model" passed to the view.
+*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List  (Repo控制器）</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New（新增）", "Create")
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.UserName)</th>
+            <th>@Html.DisplayNameFor(model => model.UserSex)</th>
+            <th>@Html.DisplayNameFor(model => model.UserBirthDay)</th>
+            <th>@Html.DisplayNameFor(model => model.UserMobilePhone)</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)    // 註解：請問 model與 Model兩個字（除了大小寫不同）有何差異？？
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                <td>@Html.DisplayFor(modelItem => item.UserSex)</td>
+                <td>@Html.DisplayFor(modelItem => item.UserBirthDay)</td>
+                <td>@Html.DisplayFor(modelItem => item.UserMobilePhone)</td>
+                <td>
+                    @*  @Html.ActionLink("Edit（編輯與修改）", "Edit", new { _ID = item.UserId }) |  *@
+                    @Html.ActionLink("Details（明細）", "Details", new { _ID = item.UserId }) |
+                    @Html.ActionLink("Delete（刪除）", "Delete", new { _ID = item.UserId })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    <hr />
+
+    <h3>Search文章搜尋 #1</h3>
+    @using (Html.BeginForm("Search", "Repo", FormMethod.Post))   // 三個參數：(1)動作名稱、(2)控制器名稱、(3)POST或GET
+    {
+        @:請輸入關鍵字，搜尋「UserName」欄位 --
+        @Html.TextBox("_SearchWord") // 必須跟「控制器」裡面 Search動作的「輸入變數」一樣。
+        <input type="submit" value="搜尋（請輸入關鍵字）" /> <br /><br />
+    }
+
+
+</body>
+</html>
