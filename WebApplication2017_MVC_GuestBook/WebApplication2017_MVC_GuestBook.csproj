@@ -130,7 +130,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdoNetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RepoController.cs" />
     <Compile Include="Controllers\UserDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -145,8 +144,6 @@
     <Compile Include="Models\ListAllViewModel.cs" />
     <Compile Include="Models\MVC_UserDBContext.cs" />
     <Compile Include="Models\PaginatedList.cs" />
-    <Compile Include="Models\Repo\IUserTableRepository.cs" />
-    <Compile Include="Models\Repo\UserTableRepository.cs" />
     <Compile Include="Models\UserTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -207,11 +204,6 @@
     <Content Include="Views\UserDB\Search3.cshtml" />
     <Content Include="Views\UserDB\Search4_Multi.cshtml" />
     <Content Include="Views\UserDB\Search4_Result.cshtml" />
-    <Content Include="Views\Repo\Create.cshtml" />
-    <Content Include="Views\Repo\Delete.cshtml" />
-    <Content Include="Views\Repo\Details.cshtml" />
-    <Content Include="Views\Repo\List.cshtml" />
-    <Content Include="Views\Repo\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
