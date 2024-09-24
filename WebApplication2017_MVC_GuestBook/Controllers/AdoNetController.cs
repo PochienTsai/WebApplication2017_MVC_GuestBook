@@ -11,7 +11,9 @@ using System.Web.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 //********************************************************
-
+//ADO.net建議使用DataReader(效能快,省資源）
+//1. 查詢．撈取紀錄 ：配合Select 的SQL指令(.ExecuteReader())
+//2. 新增，刪除，修改：配合Insert/Delete/Update的SQL指令(.ExecuteNonQuery())
 
 namespace WebApplication2017_MVC_GuestBook.Controllers
 {
