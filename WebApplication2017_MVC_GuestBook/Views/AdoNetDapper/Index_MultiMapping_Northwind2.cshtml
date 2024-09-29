@@ -1,0 +1,92 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2Northwind.Order_ViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>[Dapper] Index_MultiMapping_Northwind2</title>
+</head>
+<body>
+    <h3>[Dapper] Index_MultiMapping_Northwind2 （Left Join）</h3>
+    <h3>串連四個資料表 = Orders + Order Details + Products + Customers。</h3>
+    <br />
+    // Example - Query Multi-Mapping (One to Many)<br />
+    // http://dapper-tutorial.net/result-multi-mapping （一對多，北風資料庫）
+    <br /><br /><br />
+
+    <table class="table" border="1">
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.OrderID) </th>
+            <th> @Html.DisplayNameFor(model => model.OrderDate) </th>
+            <th> @Html.DisplayNameFor(model => model.CustomerID) </th>
+            <th> @Html.DisplayNameFor(model => model.CompanyName) （串連 "客戶"資料表）</th>
+            <th>該訂單的「訂購項目（品項 Order Details）」</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td bgcolor="pink">
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td bgcolor="pink">
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td bgcolor="pink">
+                <font color="red">
+                    @Html.DisplayFor(modelItem => item.CustomerID)
+                </font>
+            </td>
+            <td bgcolor="pink">
+                <font color="red">
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </font>
+            </td>
+            <td>
+
+                <!-- 雙重迴圈（呈現  一對多） -->
+                <!-- *** 這個區域需要自己動手寫 ****************************************************(start) -->
+                <table class="table" border="1">
+                    <tr>
+                        <th>OrderID</th>
+                        <th>ProductID</th>
+                        <th>ProductName（串連 "產品"資料表）</th>
+                        <th>Quantity</th>
+                    </tr>
+
+                    @foreach (var item2 in item.OD_VMs)
+                    {   //                                      *********** 改寫的 重 點！！ Orders_ViewModel類別檔的「導覽屬性」
+                        <tr>
+                            <td bgcolor="Aqua">
+                                @Html.DisplayFor(modelItem2 => item2.OrderID)
+
+                            </td>
+                            <td bgcolor="Aqua">
+                                @Html.DisplayFor(modelItem2 => item2.ProductID)
+                            </td>
+                            <td bgcolor="Aqua">
+                                <font color="blue">
+                                    @Html.DisplayFor(modelItem2 => item2.ProductName)
+                                    <!--                                                          **************** 改寫的 重 點！！  -->
+                                </font>
+                            </td>
+                            <td bgcolor="Aqua">
+                                @Html.DisplayFor(modelItem2 => item2.Quantity)
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <!-- *** 這個區域需要自己動手寫 ****************************************************( end ) -->
+
+            </td>
+        </tr>
+        }
+
+    </table>
+</body>
+</html>

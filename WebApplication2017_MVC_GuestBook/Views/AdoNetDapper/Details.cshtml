@@ -1,0 +1,63 @@
+﻿@model  WebApplication2017_MVC_GuestBook.Models.UserTable
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>UserTable（Dapper）</h4>
+        var userTable = Conn.Query&lt;UserTable&gt;(sqlstr, new { UserId = _ID })<font color="red">.FirstOrDefault()</font>; <br /><br />
+        // 如果沒有加上 .FirstOrDefault()，錯誤訊息如下：<br />
+        //......傳入此字典的模型項目為型別 'System.Collections.Generic.List`1[WebApplication2017_MVC_GuestBook.Models.UserTable]'，<br />
+        //......但是此字典需要型別 'WebApplication2017_MVC_GuestBook.Models.UserTable' 的模型項目。 <br /><br /><br />
+        資料來源  http://dapper-tutorial.net/result-strongly-typed <br />
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserSex)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserSex)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserBirthDay)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserBirthDay)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserMobilePhone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserMobilePhone)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

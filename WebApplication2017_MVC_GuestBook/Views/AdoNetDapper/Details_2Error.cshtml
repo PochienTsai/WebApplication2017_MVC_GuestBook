@@ -9,16 +9,17 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Search</title>
+    <title>List</title>
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New（新增）", "Create")   <br /><br />
-
-         <h3>Search -- 您搜尋的關鍵字是 -- <font color="red"> @ViewData["SW"] </font></h3>
+        @Html.ActionLink("Create New（新增）", "Create")
     </p>
     <table class="table" border="1">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentTable2s.DepartmentName)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
@@ -31,10 +32,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.UserMobilePhone)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserApproved)
+            </th>
+            <th></th>
         </tr>
     
     @foreach (var item in Model) {
         <tr>
+            <td>
+                <!-- *******  失敗，結果沒有出來 ******* -->
+                @Html.DisplayFor(modelItem => item.DepartmentTable2s.DepartmentName)
+                <!-- ，因為這要關連到另一個 DepartmentTable2s資料表 -->
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
@@ -46,6 +56,14 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserMobilePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserApproved)
+            </td>
+            <td>
+                @Html.ActionLink("Edit（編輯）", "Edit", new { _ID=item.UserId }) |
+                @Html.ActionLink("Details（明細）", "Details", new { _ID=item.UserId }) |
+                @Html.ActionLink("Delete（刪除）", "Delete", new { _ID=item.UserId })
             </td>
         </tr>
     }

@@ -19,6 +19,37 @@ namespace WebApplication2017_MVC_GuestBook.Controllers
 {
     public class AdoNetController : Controller
     {
+        //*************************************   連結 MVC_UserDB2 資料庫  ********************************* (start)
+        private MVC_UserDB2Context _db = new MVC_UserDB2Context();
+
+        // 有開啟DB連結，就得動手關掉、Dispose這個資源。https://msdn.microsoft.com/zh-tw/library/system.idisposable.dispose(v=vs.110).aspx
+        // 或是 官方網站的教材（程式碼）https://github.com/aspnet/Docs/blob/master/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/Controllers/MoviesController.cs
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)   {
+                _db.Dispose();  //***這裡需要自己修改，例如 _db字樣
+            }
+            base.Dispose(disposing);
+            // 資料庫一旦開啟連線，用完就得要關閉連線與釋放資源。
+            // The base "Controller" class already implements the "IDisposable" interface, so this code simply adds an "override" to the 
+            // "Dispose(bool)" method to explicitly dispose the context instance. 
+            // ( "Dispose(bool)"方法標示為 virtual，所以可以用override覆寫。https://msdn.microsoft.com/zh-tw/library/dd492699(v=vs.118).aspx )
+
+            // "Controller" class  https://msdn.microsoft.com/zh-tw/library/system.web.mvc.controller(v=vs.118).aspx
+        }
+
+        //// 如果找不到動作（Action）或是輸入錯誤的動作名稱，一律跳回首頁
+        //// HandleUnknownAction方法標示為 virtual，所以可以用override覆寫。https://msdn.microsoft.com/zh-tw/library/dd492730(v=vs.118).aspx
+        //protected override void HandleUnknownAction(string actionName)
+        //{
+        //    Response.Redirect("http://公司首頁(網址)/");
+        //    base.HandleUnknownAction(actionName);
+        //}
+
+        //*************************************   連結 MVC_UserDB2 資料庫  ********************************* (end)
+
+
+
         // GET: AdoNet
 
         public ActionResult Index()
@@ -134,17 +165,9 @@ namespace WebApplication2017_MVC_GuestBook.Controllers
                 result.Add(new UserTable2
                 {
                     UserId = Convert.ToInt32(dr["UserId"]),
-                    UserName = dr["UserName"].ToString(),           
-                    //UserId = Convert.IsDBNull(dr["UserId"]) ? 0 : Convert.ToInt32(dr["UserId"]),
-                    //UserName = Convert.IsDBNull(dr["UserName"]) ? "空(null)" : dr["UserName"].ToString(),
-                    
+                    UserName = dr["UserName"].ToString(),
                     UserSex = dr["UserSex"].ToString(),
-
-                    //UserBirthDay = Convert.ToDateTime(dr["UserBirthDay"]),
-                    //重點！！上述的寫法，如果遇見欄位裡面有「空」值（DBNull），就會報錯。但使用LINQ來查詢則不會報錯。
-                    UserBirthDay = Convert.IsDBNull(dr["UserBirthDay"]) ? new DateTime(1900,1,1) : Convert.ToDateTime(dr["UserBirthDay"]),
-                    //                      **************  https://learn.microsoft.com/zh-tw/dotnet/api/system.datetime?view=net-7.0
-
+                    UserBirthDay = Convert.ToDateTime(dr["UserBirthDay"]),
                     UserMobilePhone = dr["UserMobilePhone"].ToString(),
                     UserApproved = Convert.ToBoolean(dr["UserApproved"])
                 });
@@ -336,20 +359,20 @@ namespace WebApplication2017_MVC_GuestBook.Controllers
             #endregion
 
 
-            //// 檢視畫面上的「下拉式選單（DropDownList）」。
-            //// 直接連結一個資料表，當作 DropDownList的資料來源。
-            //#region   // 請參閱 DropDownList控制器，底下的 Create1動作。  ADO.NET版 請看 Create1A動作
-            //var dt = _db.DepartmentTable2s.ToList();   // 這一列改成 ADO.NET程式，就能到資料庫撈取您要的數據
+            // 檢視畫面上的「下拉式選單（DropDownList）」。
+            // 直接連結一個資料表，當作 DropDownList的資料來源。
+            #region   // 請參閱 DropDownList控制器，底下的 Create1動作。  ADO.NET版 請看 Create1A動作
+            var dt = _db.DepartmentTable2s.ToList();   // 這一列改成 ADO.NET程式，就能到資料庫撈取您要的數據
 
-            ////*******************************************************************************
-            ////*** 重點！！這裡需要用 第四個參數。當作「預設值（SelectedValue）」
-            ////*******************************************************************************
-            //SelectList listItems = new SelectList(dt, "DepartmentId", "DepartmentName", resultClass.DepartmentId);
-            //// 先寫 <option>子選項的 value，再寫 text
+            //*******************************************************************************
+            //*** 重點！！這裡需要用 第四個參數。當作「預設值（SelectedValue）」
+            //*******************************************************************************
+            SelectList listItems = new SelectList(dt, "DepartmentId", "DepartmentName", resultClass.DepartmentId);
+            // 先寫 <option>子選項的 value，再寫 text
 
-            //ViewBag.DtListItem = listItems;
-            ////*******************
-            //#endregion
+            ViewBag.DtListItem = listItems;
+            //*******************
+            #endregion
 
 
             return View(resultClass);   // 把這一筆記錄呈現出來。   

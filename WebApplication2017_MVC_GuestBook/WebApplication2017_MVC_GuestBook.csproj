@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.1.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -129,12 +132,23 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdoNetController.cs" />
+    <Compile Include="Controllers\AdoNetDapperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RepoController.cs" />
     <Compile Include="Controllers\UserDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models2Northwind\Customer.cs" />
+    <Compile Include="Models2Northwind\Employee.cs" />
+    <Compile Include="Models2Northwind\NorthwindContext.cs" />
+    <Compile Include="Models2Northwind\Order.cs" />
+    <Compile Include="Models2Northwind\Order_Detail.cs" />
+    <Compile Include="Models2Northwind\Order_Detail_ViewModel.cs" />
+    <Compile Include="Models2Northwind\Order_ViewModel.cs" />
+    <Compile Include="Models2Northwind\Product.cs" />
+    <Compile Include="Models2Northwind\Shipper.cs" />
+    <Compile Include="Models2Northwind\Supplier.cs" />
     <Compile Include="Models2\DepartmentTable2.cs" />
     <Compile Include="Models2\MVC_UserDB2Context.cs" />
     <Compile Include="Models2\UDmultiViewModel.cs" />
@@ -177,6 +191,26 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\.DS_Store" />
+    <Content Include="Views\AdoNetDapper\Create.cshtml" />
+    <Content Include="Views\AdoNetDapper\Details.cshtml" />
+    <Content Include="Views\AdoNetDapper\Details_2Error.cshtml" />
+    <Content Include="Views\AdoNetDapper\IndexVM0.cshtml" />
+    <Content Include="Views\AdoNetDapper\IndexVM1.cshtml" />
+    <Content Include="Views\AdoNetDapper\IndexVM2.cshtml" />
+    <Content Include="Views\AdoNetDapper\Index_MultiMapping.cshtml" />
+    <Content Include="Views\AdoNetDapper\Index_MultiMapping_Northwind1.cshtml" />
+    <Content Include="Views\AdoNetDapper\Index_MultiMapping_Northwind2.cshtml" />
+    <Content Include="Views\AdoNetDapper\List.cshtml" />
+    <Content Include="Views\AdoNetDapper\List1_String.cshtml" />
+    <Content Include="Views\AdoNet\Create.cshtml" />
+    <Content Include="Views\AdoNet\Details.cshtml" />
+    <Content Include="Views\AdoNet\Details2.cshtml" />
+    <Content Include="Views\AdoNet\DetailsError.cshtml" />
+    <Content Include="Views\AdoNet\Edit.cshtml" />
+    <Content Include="Views\AdoNet\Edit.jpg" />
+    <Content Include="Views\AdoNet\Edit_比較版.cshtml" />
+    <Content Include="Views\AdoNet\List.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
