@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserTable2>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List - ADO.NET</title>
+</head>
+<body>
+    <h3>ADO.NET版</h3>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserSex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserBirthDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserMobilePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserApproved)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserSex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserBirthDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserMobilePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserApproved)
+            </td>
+            <td>
+                @Html.ActionLink("Edit（編輯）", "Edit", new { _ID = item.UserId }) |
+                @Html.ActionLink("Details（明細1）", "Details", new { _ID = item.UserId }) |
+                @Html.ActionLink("Details2（明細2）", "Details2", new { _ID = item.UserId }) |
+                @Html.ActionLink("Delete（刪除）", "Delete", new { _ID = item.UserId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

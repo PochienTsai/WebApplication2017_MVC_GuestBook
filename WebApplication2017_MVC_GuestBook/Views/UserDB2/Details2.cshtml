@@ -1,0 +1,79 @@
+﻿@* *********************************************************************************** *@
+@model WebApplication2017_MVC_GuestBook.Models2.UserTable2
+@* 本範例在控制器中，Details動作 是把資料填入 UserTable2類別裡面  *@
+@* *********************************************************************************** *@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details - 列出單一記錄的明細 (ADO.NET)</title>
+</head>
+<body>
+    <div>
+        <h4>UserTable2 (ADO.NET) - 把資料填入 UserTable2類別</h4>
+        Details - 列出單一記錄的明細。請自行輸入網址 網址 http://xxxxxxxx/UserDB2/Details2?ID=1
+        <hr />
+
+            <!--  為何這裡顯示不出來？？？  ==================================  (start) -->
+            <dt>
+                @Html.DisplayNameFor(model => model.DepartmentTable2s.DepartmentName)
+            </dt>
+            <dd>
+                <font color="blue"> @Html.DisplayFor(model => model.DepartmentTable2s.DepartmentName) </font>  <br /><br /><br />
+            </dd>
+            <!--  為何這裡顯示不出來？？？  ==================================  (end) -->
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                <font color="blue"> @Html.DisplayFor(model => model.UserName) </font>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserSex)
+            </dt>
+
+            <dd>
+                <font color="blue"> @Html.DisplayFor(model => model.UserSex) </font>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserBirthDay)
+            </dt>
+
+            <dd>
+                <font color="blue"> @Html.DisplayFor(model => model.UserBirthDay) </font>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserMobilePhone)
+            </dt>
+
+            <dd>
+                <font color="blue"> @Html.DisplayFor(model => model.UserMobilePhone) </font>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserApproved)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserApproved)
+            </dd>
+
+        </dl>
+
+    <p>
+        @Html.ActionLink("Edit（編輯）", "Edit", new { _ID = Model.UserId }) |
+        @Html.ActionLink("Back to List（列表）", "List")
+    </p>
+</body>
+</html>

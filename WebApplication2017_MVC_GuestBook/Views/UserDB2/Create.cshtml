@@ -1,0 +1,174 @@
+﻿@* @model WebApplication2017_MVC_GuestBook.Models2.UserTable2 *@
+@*  也可以寫成下面這樣：    *@
+
+@using WebApplication2017_MVC_GuestBook.Models2
+@model UserTable2
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create - 新增一筆記錄</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <h4>UserTable2</h4>  新增一筆記錄
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <!-- 參考資料 https://dotblogs.com.tw/brooke/2014/08/07/146189  -->
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @* 本次新加入的驗證，需搭配Controller的 **第二個Create動作**  --「ModelState.AddModelError()」這一段程式。*@
+        @* 預設值為 true。建議改成 false，效果才會出來！  https://dotblogs.com.tw/brooke/2014/08/07/146189 *@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserSex, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <!--  下拉式選單 #2。https://stackoverflow.com/questions/17727386/dropdownlist-in-mvc-4-with-razor -->
+            @{var listItemsSex = new List<SelectListItem>
+          {
+              new SelectListItem { Text = "男", Value="M" },
+              new SelectListItem { Text = "女", Value="F" },
+          };
+            }
+            <!-- *************************************************************** -->
+            @Html.DropDownList("UserSex", listItemsSex, "-= 請選擇 =-", htmlAttributes: new { @class = "form-control" })
+
+            @* 原本自動產生的，是 TextBox
+            @Html.EditorFor(model => model.UserSex, new { htmlAttributes = new { @class = "form-control" } }) *@
+
+            @Html.ValidationMessageFor(model => model.UserSex, "", new { @class = "text-danger" })
+        </div>
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserBirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.UserBirthDay, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserBirthDay, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserMobilePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.UserMobilePhone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserMobilePhone, "", new { @class = "text-danger" })
+        </div>
+
+        <!-- ************************************************************************************************ -->
+        <!--  新增加的資料表欄位 (bool 布林值)，在此變成 CheckBox -->   <br /><br />
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserApproved, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="checkbox">
+                @Html.EditorFor(model => model.UserApproved)
+                @Html.ValidationMessageFor(model => model.UserApproved, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <!-- ************************************************************************************************ -->
+        <!-- ***  SelectListItem **************************************************************************** -->
+        <!-- ************************************************************************************************ -->
+        <!--  下拉式選單#1。https://stackoverflow.com/questions/17727386/dropdownlist-in-mvc-4-with-razor -->
+        <!--   MSDN中文範例 https://docs.microsoft.com/zh-tw/aspnet/mvc/overview/older-versions/working-with-the-dropdownlist-box-and-jquery/using-the-dropdownlist-helper-with-aspnet-mvc --><br /><br />
+        @*@{
+        List<SelectListItem> listItems = new List<SelectListItem>();
+        listItems.Add(new SelectListItem
+        {
+            Text = "資訊管理系",
+            Value = "1"
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "財務金融系",
+            Value = "3"
+            // ,Selected = true   // 預設（被挑選）的選項
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "行銷管理系",
+            Value = "4"
+        });
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                 <!-- *************************************************************** -->
+                @Html.DropDownList("DepartmentId", listItems, "-= 請選擇 =-", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+        <!--  下拉式選單 #2。https://stackoverflow.com/questions/17727386/dropdownlist-in-mvc-4-with-razor -->
+        @{var listItems = new List<SelectListItem>
+              {
+                  new SelectListItem { Text = "資訊管理系", Value="1" },
+                  new SelectListItem { Text = "財務金融系", Value="3" },
+                  new SelectListItem { Text = "行銷管理系", Value="4" }
+              };
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <!-- *************************************************************** -->
+                @Html.DropDownList("DepartmentId", new SelectList(listItems, "Value", "Text"), "-= 請選擇 = -")
+                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--  下拉式選單 #3。https://stackoverflow.com/questions/17727386/dropdownlist-in-mvc-4-with-razor -->
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                 <!-- *************************************************************** -->
+                @Html.DropDownListFor(model => model.DepartmentId, new List<SelectListItem>
+                    {
+                                new SelectListItem() { Text = "資訊管理系", Value="1" },
+                                new SelectListItem() { Text = "財務金融系", Value="3" },
+                                new SelectListItem() { Text = "行銷管理系", Value="4" }
+                    }, "-= 請選擇 = -")
+                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+        <!-- *** 下一個範例將會使用 SelectList + DropDownList（資料來源為DB）。
+         請看 DropDownListController與 ModelDropDownList目錄 *** -->
+
+
+
+        <br /><br />
+        <div class="form-group">
+            <input type="submit" value="Create（新增一筆記錄）" />
+        </div>
+    </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to Index（回首頁）", "Index")  &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        @Html.ActionLink("Back to List（列表）", "List")
+    </div>
+</body>
+</html>

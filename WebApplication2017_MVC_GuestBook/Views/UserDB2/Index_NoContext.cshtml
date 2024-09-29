@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserTable2>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index_NoContext - 請參閱圖片 UserDB2_Index.jpg，**不使用 ** Context設定。</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <h3>Index_NoContext - 請參閱圖片 UserDB2_Index.jpg，**不使用 ** Context設定。</h3>
+    <br /><br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserSex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserBirthDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserMobilePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserApproved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentId)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserSex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserBirthDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserMobilePhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserApproved)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

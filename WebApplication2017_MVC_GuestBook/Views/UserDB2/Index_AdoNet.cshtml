@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserDepartmentViewModel>
+@*
+    // 註解：請問 model與 Model兩個字（除了大小寫不同）有何差異？？
+    // @Model is "a property of the view" that refers to the model that was passed to the view from the controller.
+    // This property is strongly typed based on the data type specified in the @model directive at the top of the view.
+    // ***  @model occurs "only once" and specifies the "data type" of the model.
+    // ***  @Model allows you to reference "the value for the model" passed to the view.
+
+    // 文章說明： When To Use IEnumerable, ICollection, IList And List（文章後面有一張圖）
+    // http://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/
+    //  IEnumerable -- 只用於「唯讀」的資料展示。
+    //  ICollection -- 您想修改集合或關心其大小(size)。
+    //  IList -- 您想要修改集合，並關心集合中元素的排序和/或位置。
+*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index_AdoNet。使用 ADO.NET來做，搭配 ViewModel</title>
+</head>
+<body>
+    <h3>使用 ADO.NET來做，搭配 ViewModel</h3>-- UserDepartmentViewModel.cs 檔案
+    <p>  </p>
+    <table class="table" border="1">
+        <tr>
+            <th>UserId</th>
+            <th>UserName</th>
+            <th>DepartmentId</th>
+            <th bgcolor="pink"><i>DepartmentId</i></th>
+            <th bgcolor="pink"><i>DepartmentName</i></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>    <!-- **** 注意！ ViewModel的改寫 ****  -->
+                <td>  @item.UserVM.UserId  </td>
+                <td>  @item.UserVM.UserName  </td>
+                <td>  @item.UserVM.DepartmentId  </td>
+                <td bgcolor="pink">  <i> @item.DepartmentVM.DepartmentId</i> </td>
+                <td bgcolor="pink">  <i> @item.DepartmentVM.DepartmentName</i> </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

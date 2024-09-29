@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserTable2>
+@*
+    // 註解：請問 model與 Model兩個字（除了大小寫不同）有何差異？？
+    // @Model is "a property of the view" that refers to the model that was passed to the view from the controller.
+    // This property is strongly typed based on the data type specified in the @model directive at the top of the view.
+    // ***  @model occurs "only once" and specifies the "data type" of the model.
+    // ***  @Model allows you to reference "the value for the model" passed to the view.
+
+    // 文章說明： When To Use IEnumerable, ICollection, IList And List（文章後面有一張圖）
+    // http://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/
+    //  IEnumerable -- 只用於「唯讀」的資料展示。
+    //  ICollection -- 您想修改集合或關心其大小(size)。
+    //  IList -- 您想要修改集合，並關心集合中元素的排序和/或位置。
+*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index - 無須使用 ViewModel，直接完成</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th bgcolor="yellow">
+            <!--       產生檢視畫面時，自動完成    ****************************************** -->
+            <!-- //  請參閱圖片 UserDB2_Index.jpg，請參閱圖片 UserDB2_Index.jpg，必須有這個 Context設定 才會自動出現下面的連結。 -->
+            @Html.DisplayNameFor(model => model.DepartmentTable2s.DepartmentName)
+            <!--       產生檢視畫面時，自動完成    ****************************************** -->
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserSex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserBirthDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserMobilePhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserApproved)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td bgcolor="yellow">
+                <!--       產生檢視畫面時，自動完成    ****************************************** -->
+                <!-- //  請參閱圖片 UserDB2_Index.jpg，必須有這個設定。才會自動出現下面的連結。 -->
+                @Html.DisplayFor(modelItem => item.DepartmentTable2s.DepartmentName)
+                <!--       產生檢視畫面時，自動完成    ****************************************** -->
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserSex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserBirthDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserMobilePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserApproved)
+            </td>
+            <td>
+                @Html.ActionLink("Edit（編輯）", "Edit", new { _ID = item.UserId }) |
+                @Html.ActionLink("Details（明細1）", "Details", new { _ID = item.UserId }) |
+                @Html.ActionLink("Details2（明細2）", "Details2", new { _ID = item.UserId }) |
+                @Html.ActionLink("Delete（刪除）", "Delete", new { _ID = item.UserId })
+            </td>
+        </tr>
+    }
+
+</table>

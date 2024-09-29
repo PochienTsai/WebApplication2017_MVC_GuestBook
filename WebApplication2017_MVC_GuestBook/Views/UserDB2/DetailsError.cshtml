@@ -1,0 +1,78 @@
+﻿@* *********************************************************************************** *@
+@model WebApplication2017_MVC_GuestBook.Models2.UserTable2
+@* 本範例在控制器中，Details動作 是把資料填入 List 裡面（List<UserTable2>）  *@
+@* *********************************************************************************** *@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetailsError</title>
+</head>
+<body>
+    <div>
+        <h4>UserTable2</h4>
+        這個範例有錯，讓您看看錯誤訊息。  請自行輸入網址 網址 http://xxxxxxxx/UserDB2/DetailsError?ID=1
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DepartmentTable2s.DepartmentName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DepartmentTable2s.DepartmentName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserSex)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserSex)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserBirthDay)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserBirthDay)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserMobilePhone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserMobilePhone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserApproved)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserApproved)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { _ID = Model.UserId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

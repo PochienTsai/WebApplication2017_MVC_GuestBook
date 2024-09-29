@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserDepartmentViewModel>
+@*
+    // 註解：請問 model與 Model兩個字（除了大小寫不同）有何差異？？
+    // @Model is "a property of the view" that refers to the model that was passed to the view from the controller.
+    // This property is strongly typed based on the data type specified in the @model directive at the top of the view.
+    // ***  @model occurs "only once" and specifies the "data type" of the model.
+    // ***  @Model allows you to reference "the value for the model" passed to the view.
+
+    // 文章說明： When To Use IEnumerable, ICollection, IList And List（文章後面有一張圖）
+    // http://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/
+    //  IEnumerable -- 只用於「唯讀」的資料展示。
+    //  ICollection -- 您想修改集合或關心其大小(size)。
+    //  IList -- 您想要修改集合，並關心集合中元素的排序和/或位置。
+*@
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexMasterDetails  (ViewModel版)</title>
+</head>
+<body>
+    <h3>內容展示 -- 主表明細 ViewModel版（Master Details / 主細表）</h3>
+    <br />重點：產生檢視畫面時，請 不要 選「資料內容類別」。詳見https://stackoverflow.com/questions/20816115/do-viewmodels-need-keys
+    <br />請輸入  /UserDB2/IndexMasterDetails?_ID=4  觀看結果
+    <p>
+        @Html.ActionLink(" **回到 IndexJOIN 頁面** ", "IndexJOIN")
+    </p>
+
+    <h4>主表（Master）</h4>
+    <table class="table" border="1">
+        <tr>
+            <th><i>DepartmentId</i></th>
+            <th><i>DepartmentName</i></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td align="center">
+                    <font color="red">
+                        <i> @item.DepartmentVM.DepartmentId</i>
+                    </font>
+                </td>
+                <td>
+                    <i> @item.DepartmentVM.DepartmentName</i>
+                </td>
+            </tr>
+
+            break;   // 只跑一次迴圈
+        }
+
+    </table>
+
+    <br /><hr /><br />
+
+    <h4>明細（Details） -- 這個科系有哪些學生？</h4>
+    <table class="table" border="1">
+        <tr>
+            <th>UserId</th>
+            <th>UserName</th>
+            <th><font color="red">DepartmentId</font></th>
+            <th><font color="red">DepartmentName</font></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.UserVM.UserId
+                </td>
+                <td>
+                    @item.UserVM.UserName
+                </td>
+                <td align="center">
+                    <font color="red">
+                        @item.UserVM.DepartmentId
+                    </font>
+                </td>
+                <td>
+                    <font color="red">
+                        @item.DepartmentVM.DepartmentName
+                        @* *** 科系名稱，放在另一個 DepartmentTable2 資料表裡面********* *@
+                    </font>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserDepartmentViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexMasterDetails5</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <h3>有Bug，畫面資料會重複</h3>
+    // (2). ViewModel版（檔名 /Models2/UserDepartmentViewModel.cs）。<br />
+    //       兩個 Table做 JOIN 並且展示在畫面上。<br />
+    // 缺點：重複的資料（科系）會不斷出現。需要額外過濾。<br />
+
+    <!-- ***** 以下全部 自己動手寫 *****  -->
+
+    <table class="table" border="1">
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentVM.DepartmentName)
+            </td>                                                      <!-- ***重點！ *** -->
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentVM.DepartmentYear)
+                <!-- ***重點！ *** -->
+                <hr />
+
+                <!-- *** 底下這段，需自己動手寫 ******************************************  -->
+                <!-- *** 請模仿第三個範例（IndexMasterDetails2）來做 ************** (start)  -->
+                <table border="1">
+                    @foreach (var x in item.DepartmentVM.UserTable2s)
+                    {  <!-- *** 重點！！*********** -->
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelx => x.UserId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelx => x.UserName)
+                        </td>
+                        <td align="center">
+                            <font color="red">
+                                @Html.DisplayFor(modelx => x.DepartmentId)
+                            </font>
+                        </td>
+                    </tr>
+                    }
+                </table>
+                <!-- *** 請模仿第一個範例（IndexMasterDetails）來做 *************** (end)  -->
+
+            </td>
+        </tr>
+        }
+
+    </table>
+</body>
+</html>

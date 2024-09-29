@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserTable2ViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexMasterDetails2_NavigationVM 需搭配 ViewModel  ( /Models2目錄下的 UserTable2sViewModel )</title>
+</head>
+<body>
+    <h3>需搭配 ViewModel</h3>  ( /Models2目錄下的 UserTable2sViewModel )
+    <br />
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.UserId) </th>
+            <th> @Html.DisplayNameFor(model => model.UserName) </th>
+            <th> @Html.DisplayNameFor(model => model.UserSex) </th>
+            <th> @Html.DisplayNameFor(model => model.UserBirthDay) </th>
+            <th> @Html.DisplayNameFor(model => model.UserMobilePhone) </th>
+            <th> @Html.DisplayNameFor(model => model.UserApproved) </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DepartmentId)*@
+                <!-- 請自己動手改寫如下。 -->
+                @Html.DisplayNameFor(model => model.DepartmentTable2s.DepartmentId)
+                <!--                                                            ********************** 導覽屬性    -->
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.UserId) </td>
+                <td> @Html.DisplayFor(modelItem => item.UserName) </td>
+                <td> @Html.DisplayFor(modelItem => item.UserSex) </td>
+                <td> @Html.DisplayFor(modelItem => item.UserBirthDay) </td>
+                <td> @Html.DisplayFor(modelItem => item.UserMobilePhone) </td>
+                <td> @Html.DisplayFor(modelItem => item.UserApproved) </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.DepartmentId)*@
+                    <!-- 請自己動手改寫如下。否則這裡會出現「空白」 -->
+                    @Html.DisplayFor(modelItem => item.DepartmentTable2s.DepartmentName)
+                    <!--                                                       ********************** 導覽屬性   -->
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

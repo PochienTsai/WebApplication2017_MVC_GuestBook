@@ -1,0 +1,84 @@
+﻿@model WebApplication2017_MVC_GuestBook.Models2.DepartmentTable2
+@*
+    // 註解：請問 model與 Model兩個字（除了大小寫不同）有何差異？？
+    // @Model is "a property of the view" that refers to the model that was passed to the view from the controller.
+    // This property is strongly typed based on the data type specified in the @model directive at the top of the view.
+    // ***  @model occurs "only once" and specifies the "data type" of the model.
+    // ***  @Model allows you to reference "the value for the model" passed to the view.
+
+    // 文章說明： When To Use IEnumerable, ICollection, IList And List（文章後面有一張圖）
+    // http://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/
+    //  IEnumerable -- 只用於「唯讀」的資料展示。
+    //  ICollection -- 您想修改集合或關心其大小(size)。
+    //  IList -- 您想要修改集合，並關心集合中元素的排序和/或位置。
+*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexMasterDetails</title>
+</head>
+<body>
+    <div>
+        <h3>DepartmentTable</h3>
+        // 最簡單的寫法（"不" 搭配ViewModel，直接使用<b>原有的 Model（DepartmentTable2）</b>來做。）<br />
+        //************************************************************<br />
+        // *** 內容展示 -- 主表明細（Master Details / 主細表） ***<br />
+        // ***  一對多（一個科系 有 幾位學生？）                      ***<br />
+        //************************************************************<br />
+        <hr />
+
+        <h3>
+            <font color="red">科系代號：@Html.DisplayFor(m => m.DepartmentId)</font>
+        </h3>
+
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(m => m.DepartmentName)</dt>
+            <dd>@Html.DisplayFor(m => m.DepartmentName)</dd>
+
+            <dt>@Html.DisplayNameFor(m => m.DepartmentYear)</dt>
+            <dd>@Html.DisplayFor(m => m.DepartmentYear)</dd>
+        </dl>
+        <br /><hr /><br />
+
+        <!-- **** 以下不會自動產生，請自己動手寫 ****************************************************  -->
+        <table class="table" border="1">
+            <tr>
+                <th>學生ID</th>
+                <th>姓名</th>
+                <th>科系ID</th>
+            </tr>
+            @* //************************************************************
+                //*** 重點！一對多   （一個科系底下，有幾名學生？）
+                //************************************************************
+            *@
+            @foreach (var item in Model.UserTable2s)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>            <!-- ***重點！modelItem *** -->
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>            <!-- ***重點！modelItem *** -->
+                    <td align="center">
+                        <font color="red"> @Html.DisplayFor(modelItem => item.DepartmentId) </font>
+                                                                   <!-- ***重點！modelItem *** -->
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+    <p>
+        @Html.ActionLink("Edit（編輯）", "Edit", new { _ID = Model.DepartmentId }) |
+        @Html.ActionLink("Back to List", "IndexJOIN")
+    </p>
+</body>
+</html>

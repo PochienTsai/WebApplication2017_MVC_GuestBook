@@ -1,0 +1,67 @@
+﻿@model WebApplication2017_MVC_GuestBook.Models2.UDmultiViewModel
+@*          ***********************************************************************    手動修改，非集合 *@
+@*          因為這個 ViewModel裡面，就是兩個 List<T> *@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexVM2</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    (多對多，列表。一個科系對應多名學生。)<br />
+    使用  /Model2目錄底下的 *** UD<font color="red">multi</font>ViewModel類別<br />
+
+
+    <table class="table">
+        <tr>
+            <th></th>
+        </tr>
+        <tr>
+            <th></th>
+        </tr>
+        @*                               *** 自己動手修改 ***  *@
+        @foreach (var item in Model.DVM)
+        {
+            <tr>
+                <td bgcolor="pink">
+                    <br />
+                    @Html.Label(item.DepartmentId.ToString())  *** @Html.Label(item.DepartmentName)
+                    <hr /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @*                                                    ************* 自己動手修改 ***************************  *@
+                    @foreach (var itemU in Model.UVM.Where(m => m.DepartmentId == item.DepartmentId))
+                    {
+                        @: 科系ID -
+                        @Html.Label(itemU.DepartmentId.ToString())
+
+                        @*  *********************************************************************************************  *@
+                        @*  重點！！如果使用下面這種寫法，遇見「.」符號會隱藏。例如 ADO.NET或 MIS2000 Lab.   *@
+                        @*  @Html.Display(itemU.UserName)   <br />   *@
+                        @*  @Html.Label(itemU.UserName)  *@
+                        @*  *********************************************************************************************  *@
+
+                        @: ---
+                        @itemU.UserName
+                        @* 或是寫成  @Html.Raw(itemU.UserName)  *@
+                        @*   正常顯示 Html.DisplayFor(item => itemU.UserName)   *@
+                        <br />
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

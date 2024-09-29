@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UDViewModel>
+@*  列出「多筆」科系，每一個科系底下又有「多個」學生  *@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexVM1 -- 搭配ViewModels（檔名 UDViewModel.cs）</title>
+</head>
+<body>
+    <h3>IndexVM1 -- 搭配ViewModels（檔名 UDViewModel.cs）</h3>
+    <hr />
+
+    <table class="table" border="1" width="300px">
+        <tr>
+            <th>透過 ViewModels來做。<br />多對多（列表）。把每個科系底下的學員，通通列出來</th>
+        </tr>
+        @*  *********************************************************************************************  *@
+        @* 如果把下面通通改成 Html.Display() 為什麼通通變成空白？文字消失不見？ *@
+        @*   https://stackoverflow.com/questions/5138230/what-is-the-difference-between-html-label-and-html-display *@
+        @*   https://msdn.microsoft.com/zh-tw/library/ee310174(v=vs.118).aspx  *@
+        @*  *********************************************************************************************  *@
+
+        @foreach (var itemD in Model)
+        {
+        <tr>
+            <td>
+                @* 錯誤範例（這裡的文字會變成隱形、無法呈現） *@
+                @* 如果 DepartmentTable2s 類別檔的「屬性」，沒有設定 [DataType(.....)]。這裡就無法（不知道）如何呈現這些資料？ *@
+                @*     科系： （ @Html.Display(itemD.DVM.DepartmentId.ToString())  ）<br />
+        === @Html.Display(itemD.DVM.DepartmentName) ===<br />  *@
+
+
+                科系： （ @Html.Label(itemD.DVM.DepartmentId.ToString())  ）<br />
+
+                *** @Html.DisplayFor(item => itemD.DVM.DepartmentName) ***<br />
+                @* Html.Display()看不見，必須搭配 DepartmentTable2s 類別檔的「屬性」，設定[DataType(.....)]。 但，Html.DisplayFor()正常顯示。 *@
+                @* 正常顯示「屬性（欄位標題）名稱」 - Html.LabelFor(item => itemD.DVM.DepartmentName)   *@
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="pink">
+                該系所的學生列表：<br />                    <br />
+                @foreach (var itemU in itemD.UVM)
+                {
+                    @*  *********************************************************************************************  *@
+                    @*  重點！！如果使用下面這種寫法，遇見「.」符號會隱藏。例如 ADO.NET或 MIS2000 Lab.   *@
+                    @*  @Html.Display(itemU.UserName)   <br />   *@
+                    @*  *********************************************************************************************  *@
+
+
+                    @itemU.UserName 
+                    @* 或是寫成  @Html.Raw(itemU.UserName)  *@
+                    @*   正常顯示 Html.DisplayFor(item => itemU.UserName)   *@
+
+                    @: --
+                    @Html.Label(itemU.DepartmentId.ToString())<br />
+                }
+                <br />
+            </td>
+        </tr>
+        }
+
+    </table>
+</body>
+</html>

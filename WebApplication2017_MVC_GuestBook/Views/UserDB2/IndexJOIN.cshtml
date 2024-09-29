@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserDepartmentViewModel>
+@*
+    // 註解：請問 model與 Model兩個字（除了大小寫不同）有何差異？？
+    // @Model is "a property of the view" that refers to the model that was passed to the view from the controller.
+    // This property is strongly typed based on the data type specified in the @model directive at the top of the view.
+    // ***  @model occurs "only once" and specifies the "data type" of the model.
+    // ***  @Model allows you to reference "the value for the model" passed to the view.
+
+    // (4) 文章說明： When To Use IEnumerable, ICollection, IList And List（文章後面有一張圖）
+    // http://www.claudiobernasconi.ch/2013/07/22/when-to-use-ienumerable-icollection-ilist-and-list/
+    //  IEnumerable -- 只用於「唯讀」的資料展示。
+    //  ICollection -- 您想修改集合或關心其大小(size)。
+    //  IList -- 您想要修改集合，並關心集合中元素的排序和/或位置。
+
+        // (5) https://stackoverflow.com/questions/2876616/returning-ienumerablet-vs-iqueryablet
+        // This is quite an important difference, and working on IQueryable<T> can in many cases
+        // save you from returning too many rows from the database.
+        // Another prime example is doing paging（分頁）:
+        // If you use Take and Skip on IQueryable, you will "only get（只拿你要的）" the number of rows requested;
+        // doing that on an IEnumerable<T> will cause "all of（全部 / 假分頁）" your rows to be loaded in memory.
+
+*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexJOIN</title>
+</head>
+<body>
+    重點：產生檢視畫面時，請 不要 選「資料內容類別」https://stackoverflow.com/questions/20816115/do-viewmodels-need-keys
+
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th>UserId</th>
+            <th>UserName</th>
+            <th>DepartmentId</th>
+            <th bgcolor="pink"><i>DepartmentId</i></th>
+            <th bgcolor="pink"><i>DepartmentName</i></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td align="center">
+                    @item.UserVM.UserId
+                </td>
+                <td>
+                    @item.UserVM.UserName
+                </td>
+                <td>
+                    @item.UserVM.DepartmentId
+                </td>
+                <td bgcolor="pink" align="center">
+                    <font color="red">
+                        <h4> @item.DepartmentVM.DepartmentId</h4>
+                    </font>
+                </td>
+                <td bgcolor="pink">
+                    <i>@item.DepartmentVM.DepartmentName</i>                  <br /><br />
+
+                    [簡易版] 主表明細（IndexMasterDetails動作，不搭配ViewModel）<br />
+                    @Html.ActionLink(@item.DepartmentVM.DepartmentName, "IndexMasterDetails", new { id = item.DepartmentVM.DepartmentId })
+                    <!-- 不修改路由的情況下，請改成 new { _ID = item.     就能正確執行。-->
+                </td>
+                <td>
+                    @Html.ActionLink("主表明細（ViewModel版。動作 IndexJOINMasterDetails）", "IndexJOINMasterDetails", new { id = item.DepartmentVM.DepartmentId }) |
+                    <!-- 不修改路由的情況下，請改成 new { _ID = item.     就能正確執行。-->
+
+                    @* @Html.ActionLink("Edit（編輯）", "Edit", new { _ID = item.UserId }) |
+                        @Html.ActionLink("Details（明細1）", "Details", new { _ID = item.UserId }) |
+                        @Html.ActionLink("Details2（明細2）", "Details2", new { _ID = item.UserId }) |
+                        @Html.ActionLink("Delete（刪除）", "Delete", new { _ID = item.UserId })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.DepartmentTable2>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexMasterDetails3</title>
+</head>
+<body>
+    <h3>IndexMasterDetails3</h3> - 無須使用 ViewModel，直接完成
+    <hr />
+
+    <table class="table" border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentYear)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>            <!-- ***重點！modelItem *** -->
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentYear)
+                    <!-- ***重點！modelItem *** -->
+                    <hr />
+
+                    <!-- *** 底下這一段，需自己動手寫 ******************************************  -->
+                    <!-- *** 請模仿第一個範例（IndexMasterDetails）來做 *************** (start)  -->
+                    <table border="1">
+                        @foreach (var x in item.UserTable2s)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelx => x.UserId)
+                                </td>            <!-- ***重點！modelx *** -->
+                                <td>
+                                    @Html.DisplayFor(modelx => x.UserName)
+                                </td>            <!-- ***重點！modelx *** -->
+                                <td align="center">
+                                    <font color="red">
+                                        @Html.DisplayFor(modelx => x.DepartmentId)
+                                    </font>            <!-- ***重點！modelx *** -->
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    <!-- *** 請模仿第一個範例（IndexMasterDetails）來做 *************** (end)  -->
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

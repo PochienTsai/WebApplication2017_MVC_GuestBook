@@ -1,0 +1,129 @@
+﻿@model WebApplication2017_MVC_GuestBook.Models2.UserTable2
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit - 編輯畫面（可沿用 Details2的功能）</title>
+</head>
+<body>
+    <h4>UserTable2 (ADO.NET)</h4>
+    請自行輸入網址URL  http://xxxxxx/UserDB2/Edit?ID=1
+    <br /><br />
+    產生檢視畫面之後，兩個重點 -- (1). CheckBox   (2). DropDownList
+    <hr />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserSex, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserSex, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserSex, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserBirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserBirthDay, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserBirthDay, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserMobilePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserMobilePhone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserMobilePhone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserApproved, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        <!-- *** 重點！！ CheckBox ****************************  -->
+                        @* #1  預設產生的 CheckBox：    @Html.EditorFor(model => model.UserApproved)  <br /> *@
+
+                        @*  以下這些寫法都可以正確執行！ *@
+
+                            #2  @Html.CheckBoxFor(model => model.UserApproved) <br />
+                            
+                        @*
+                            #3  @Html.CheckBoxFor(model => model.UserApproved, new { @checked = (Model.UserApproved ? "checked" : string.Empty) })  <br />
+                            #4  @Html.CheckBoxFor(model => model.UserApproved, htmlAttributes: new { @checked = (Model.UserApproved ? "checked" : string.Empty) })  <br />
+                             
+                            <!-- 詳見 http://www.tutorialsteacher.com/mvc/htmlhelper-checkbox-checkboxfor  -->
+                            #5  @Html.CheckBox("UserApproved", Convert.ToBoolean(Model.UserApproved)) <br />
+                        *@
+
+                        @* 資料來源：https://stackoverflow.com/questions/14730746/getting-checkbox-value-in-asp-net-mvc-4
+                            https://stackoverflow.com/questions/11839525/make-a-checkbox-checked-or-unchecked-based-on-the-value
+                        *@
+
+                        @Html.ValidationMessageFor(model => model.UserApproved, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <!-- *** 重點！！ DropDownList ****************************  -->
+                    @* 自動出現並搭配 下拉式選單（DropDownList）。  範例可參閱 Views/DropDownList/Create.cshtml *@
+                    @* 預設，自動產生的寫法。出現錯誤！需要手動修改。
+                          因為第二個參數是 null，所以這個下拉式選單「裡面」沒有任何子選項，因而報錯。*@
+                    @* @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" }) *@
+
+
+                    @* 下拉式選單（DropDownList），有四種寫法。 可參閱 Views/DropDownList/Create1.cshtml  *@
+
+                    @* 第三個參數 "-=請選擇=-" 或 "" ，請勿使用！！   因為要自動跟資料表 Binding *@
+                    @Html.DropDownList("DepartmentId", ViewBag.DtListItem as SelectList, new { @class = "form-control" })
+                    @* 資料來源：  https://stackoverflow.com/questions/1390830/mvc-set-selected-value-of-selectlist *@
+                    <br /> <font color="red">*** 預設的寫法就可以 Binding ***</font>
+
+
+                    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">                    <br /><br />
+                    <input type="submit" value="Save（修改、儲存）" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List（列表）", "List")
+    </div>
+</body>
+</html>

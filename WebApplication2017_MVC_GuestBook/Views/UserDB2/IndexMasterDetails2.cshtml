@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication2017_MVC_GuestBook.Models2.UserTable2>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexMasterDetails2 - 無須使用 ViewModel，直接完成</title>
+</head>
+<body>
+    <h3>IndexMasterDetails2</h3> - 無須使用 ViewModel，直接完成
+    <hr />
+    <p>
+        @Html.ActionLink("Create New（新增）", "Create")
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th bgcolor="pink"> <!--  產生檢視畫面時，自動完成  ****************************** -->
+                <h3>@Html.DisplayNameFor(model => model.DepartmentTable2s.DepartmentName)</h3>
+            </th>                         <!--  產生檢視畫面時，自動完成    ***************************** -->
+
+            <th> @Html.DisplayNameFor(model => model.UserName) </th>
+            <th> @Html.DisplayNameFor(model => model.UserSex) </th>
+            <th> @Html.DisplayNameFor(model => model.UserBirthDay) </th>
+            <th> @Html.DisplayNameFor(model => model.UserMobilePhone) </th>
+            <th> @Html.DisplayNameFor(model => model.UserApproved) </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model)    {        
+        <tr>
+            <td bgcolor="pink">
+                         <!--       產生檢視畫面時，自動完成    ****************************************** -->
+                <h3>@Html.DisplayFor(modelItem => item.DepartmentTable2s.DepartmentName)</h3>
+            </td>   <!--       產生檢視畫面時，自動完成    ****************************************** -->
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>            <!-- ***重點！modelItem *** -->
+            <td>
+                @Html.DisplayFor(modelItem => item.UserSex)
+            </td>            <!-- ***重點！modelItem *** -->
+            <td>
+                @Html.DisplayFor(modelItem => item.UserBirthDay)
+            </td>            <!-- ***重點！modelItem *** -->
+            <td>
+                @Html.DisplayFor(modelItem => item.UserMobilePhone)
+            </td>            <!-- ***重點！modelItem *** -->
+            <td>
+                @Html.DisplayFor(modelItem => item.UserApproved)
+            </td>            <!-- ***重點！modelItem *** -->
+            <td>
+                @Html.ActionLink("Edit（編輯）", "Edit", new { _ID = item.UserId }) |
+                @Html.ActionLink("Details（明細）", "Details", new { _ID = item.UserId }) |
+                @Html.ActionLink("Delete（刪除）", "Delete", new { _ID = item.UserId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
